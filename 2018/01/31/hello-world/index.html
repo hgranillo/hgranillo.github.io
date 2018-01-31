@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/31/hello-world/index.html">
 <meta property="og:site_name" content="hgranillo">
 <meta property="og:description" content="This is the first post of this blog, and I will write about how to set it up. SetupRequirements:  Node.js git  Install Hexo1npm install -g hexo-cli -g flag will install Hexo and is dependencies global">
-<meta property="og:updated_time" content="2018-01-31T05:29:35.358Z">
+<meta property="og:updated_time" content="2018-01-31T05:32:44.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="This is the first post of this blog, and I will write about how to set it up. SetupRequirements:  Node.js git  Install Hexo1npm install -g hexo-cli -g flag will install Hexo and is dependencies global">
@@ -116,7 +116,7 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2018-01-31T05:29:35.358Z" itemprop="datePublished">2018-01-31</time>
+        <time datetime="2018-01-31T05:32:44.809Z" itemprop="datePublished">2018-01-31</time>
     </div>
 
 
@@ -156,7 +156,9 @@
 <p>You will be asked for your GitHub user and password since it will try to push the commit via https.</p>
 <h2 id="Version-control"><a href="#Version-control" class="headerlink" title="Version control"></a>Version control</h2><p>If you want to keep track of your changes on the source files that generate your blog. You can init a git repository on the root of your blog directory.</p>
 <h1 id="Writing"><a href="#Writing" class="headerlink" title="Writing"></a>Writing</h1><p>Adding a new post<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &#123;postname&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Your new post will be located at <code>source/_posts/{postname}.md</code></p>
+<p>Your new post will be located at <code>source/_posts/{postname}.md</code> and you can edit it with your favorite editor, using the GitHub Markdown Syntax.</p>
+<p>To deploy the new post, simply run: <code>hexo generate -d</code></p>
+<p>This will compile all the new assets on the <code>public</code> directory and upload it to GitHub.</p>
 
   </div>
 </article>
