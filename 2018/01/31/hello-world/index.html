@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/31/hello-world/index.html">
 <meta property="og:site_name" content="hgranillo">
 <meta property="og:description" content="This is the first post of this blog, and I will write about how to set it up. SetupRequirements:  Node.js git  Install Hexo1npm install -g hexo-cli -g flag will install Hexo and is dependencies global">
-<meta property="og:updated_time" content="2018-01-31T05:02:48.186Z">
+<meta property="og:updated_time" content="2018-01-31T05:29:35.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="This is the first post of this blog, and I will write about how to set it up. SetupRequirements:  Node.js git  Install Hexo1npm install -g hexo-cli -g flag will install Hexo and is dependencies global">
@@ -93,7 +93,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-Hexo"><span class="toc-number">1.1.</span> <span class="toc-text">Install Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup-Hexo"><span class="toc-number">1.2.</span> <span class="toc-text">Setup Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Run"><span class="toc-number">1.3.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deploy"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-Hexo"><span class="toc-number">1.1.</span> <span class="toc-text">Install Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup-Hexo"><span class="toc-number">1.2.</span> <span class="toc-text">Setup Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Run"><span class="toc-number">1.3.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deploy"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version-control"><span class="toc-number">1.5.</span> <span class="toc-text">Version control</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing"><span class="toc-number">2.</span> <span class="toc-text">Writing</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -116,7 +116,7 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2018-01-31T05:02:48.186Z" itemprop="datePublished">2018-01-31</time>
+        <time datetime="2018-01-31T05:29:35.358Z" itemprop="datePublished">2018-01-31</time>
     </div>
 
 
@@ -141,10 +141,22 @@
 <p>You should have something like this in your blog directory.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  blog $ ls</span><br><span class="line">_config.yml  db.json  node_modules  package.json  package-lock.json  scaffolds  <span class="built_in">source</span>  themes</span><br></pre></td></tr></table></figure>
 <p>Change the theme property in the config.yml file. The newly installed theme also has a config.yml file, you have to edit the one located at the root of your blog.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># theme: landscape</span><br><span class="line">theme: cactus-dark</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># theme: landscape</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">cactus-dark</span></span><br></pre></td></tr></table></figure>
 <h2 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h2><p>You can run a local server to preview how your blog look,<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure></p>
 <p>When the server is running, Hexo will watch for file changes and update automatically so it’s not necessary to manually restart the server.</p>
-<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;repository url&gt;</span><br><span class="line">  branch: [branch]</span><br><span class="line">  message: [message]</span><br></pre></td></tr></table></figure>
+<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p>You will need to install <code>hexo-deployer-git</code> to use the git deployer.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>At the end of your config.yml file configure:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="string">&lt;repository</span> <span class="string">url&gt;</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">[branch]</span></span><br></pre></td></tr></table></figure>
+<p>For example:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/hgranillo/hgranillo.github.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>And then you can run a deploy with:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>This will create a directory called <code>public</code> and generate all the assets and html files needed to publish your site. Also will create a git repository in a directory named <code>.deploy_git</code> and copy all the files from <code>public</code>.</p>
+<p>You will be asked for your GitHub user and password since it will try to push the commit via https.</p>
+<h2 id="Version-control"><a href="#Version-control" class="headerlink" title="Version control"></a>Version control</h2><p>If you want to keep track of your changes on the source files that generate your blog. You can init a git repository on the root of your blog directory.</p>
+<h1 id="Writing"><a href="#Writing" class="headerlink" title="Writing"></a>Writing</h1><p>Adding a new post<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &#123;postname&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Your new post will be located at <code>source/_posts/{postname}.md</code></p>
 
   </div>
 </article>
@@ -171,7 +183,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-Hexo"><span class="toc-number">1.1.</span> <span class="toc-text">Install Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup-Hexo"><span class="toc-number">1.2.</span> <span class="toc-text">Setup Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Run"><span class="toc-number">1.3.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deploy"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Install-Hexo"><span class="toc-number">1.1.</span> <span class="toc-text">Install Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup-Hexo"><span class="toc-number">1.2.</span> <span class="toc-text">Setup Hexo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Run"><span class="toc-number">1.3.</span> <span class="toc-text">Run</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deploy"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Version-control"><span class="toc-number">1.5.</span> <span class="toc-text">Version control</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Writing"><span class="toc-number">2.</span> <span class="toc-text">Writing</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
