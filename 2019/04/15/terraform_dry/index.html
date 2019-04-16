@@ -7,13 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="As the size of the infrastructure grows and terraform code becomes more complex, maybe you have several environments spanning multiple regions. Having to maintain all of this code between environments">
+<meta name="keywords" content="terraform,aws">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Another view on Terraform DRY: Part 1">
 <meta property="og:url" content="https://hgranillo.github.io/2019/04/15/terraform_dry/index.html">
 <meta property="og:site_name" content="Ramblings of a Systems Administrator">
 <meta property="og:description" content="As the size of the infrastructure grows and terraform code becomes more complex, maybe you have several environments spanning multiple regions. Having to maintain all of this code between environments">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-04-15T21:23:58.085Z">
+<meta property="og:updated_time" content="2019-04-16T13:56:19.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Another view on Terraform DRY: Part 1">
 <meta name="twitter:description" content="As the size of the infrastructure grows and terraform code becomes more complex, maybe you have several environments spanning multiple regions. Having to maintain all of this code between environments">
@@ -131,8 +132,18 @@
 
 
       
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/terraform/">terraform</a>
+    </div>
+
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/aws/">aws</a>, <a class="tag-link" href="/tags/terraform/">terraform</a>
+    </div>
+
 
     </div>
   </header>
@@ -143,7 +154,7 @@
 <p>Having to maintain all of this code between environments becomes more error prone, and you will end up with staging environment that are different than the production ones.</p>
 <p>Also, is a really good practice to refrain yourself to run this code on your own machine and staple it to CI/CD like Gitlab-CI or Jenkins. Since my CI workers are ephemeral I won’t use Terraform Workplaces.</p>
 <p>Consider the following file structure, which defines two environments (stg, prd) and two regions (us-east-1, eu-west-1)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">vpc</span><br><span class="line">├── vars</span><br><span class="line">│   ├── stg</span><br><span class="line">│   │   ├── us-east-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   ├── eu-west-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   └── terraform.tfvars</span><br><span class="line">│   ├── prd</span><br><span class="line">│   │   ├── us-east-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   ├── eu-west-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   └── terraform.tfvars</span><br><span class="line">│   └── terraform.tfvars</span><br><span class="line">├── main.tf (locals)</span><br><span class="line">├── provider.tf (provider definitions)</span><br><span class="line">├── variables.tf</span><br><span class="line">└── vpc.tf (actual terrafom code)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">vpc</span><br><span class="line">├── vars</span><br><span class="line">│   ├── stg</span><br><span class="line">│   │   ├── us-east-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   ├── eu-west-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   └── terraform.tfvars</span><br><span class="line">│   ├── prd</span><br><span class="line">│   │   ├── us-east-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   ├── eu-west-1</span><br><span class="line">│   │   │   ├── remote_backend.tfvars</span><br><span class="line">│   │   │   └── terraform.tfvars</span><br><span class="line">│   │   └── terraform.tfvars</span><br><span class="line">│   └── terraform.tfvars</span><br><span class="line">├── main.tf (locals)</span><br><span class="line">├── provider.tf (provider definitions)</span><br><span class="line">├── variables.tf</span><br><span class="line">└── vpc.tf (actual terraform code)</span><br></pre></td></tr></table></figure>
 <p>The contents of each environment will be identical since they all use the same <code>.tf</code> files, except perhaps for a few settings that will be defined with variables (e.g. the prod environment may run bigger or more servers and staging could have a smaller vpc length).</p>
 <p>Each region and environment will have their own <code>Terraform State Files</code> (or <code>tfstate</code>) defined in <code>remote_backend.tfvars</code> file. You can pass the flag <code>-backend-config=...</code> during <code>terraform init</code> to setup your remote backend. Keep in mind that since our CI runners are ephemeral we are always starting fresh with no <code>.terraform</code> directory.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">terraform init -backend-config <span class="variable">$&#123;VAR_DIR&#125;</span>/<span class="variable">$&#123;ENV&#125;</span>/<span class="variable">$&#123;REGION&#125;</span>/remote_backend.tfvars</span><br></pre></td></tr></table></figure>
